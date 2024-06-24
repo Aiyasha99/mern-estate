@@ -8,6 +8,7 @@ import {
   deleteUserFailure,
   deleteUserStart,
   deleteUserSuccess,
+  signOutUserStart,
 } from '../redux/user/userSlice';
 
 import { useDispatch } from 'react-redux';
@@ -83,6 +84,20 @@ const dispatch = useDispatch();
   };
 
 
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  };    // after backend api craete sign out redux'
 
   console.log( formData);
     return (
@@ -141,7 +156,7 @@ const dispatch = useDispatch();
           Delete account
         </span>
         <span 
-         
+         onClick={handleSignOut}
          className='text-red-700 cursor-pointer'>
           Sign out
         </span>
