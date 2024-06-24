@@ -10,7 +10,7 @@ import {
   deleteUserSuccess,
   signOutUserStart,
 } from '../redux/user/userSlice';
-
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 // fireabse storage rules 
 // rules_version = '2';
@@ -147,6 +147,18 @@ const dispatch = useDispatch();
         >
   Update
         </button>
+        <Link
+          className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+          to={'/create-listing'}
+        >
+          Create Listing
+        </Link>
+        <button 
+        // onClick={handleShowListings}
+         className='text-green-700 w-full'>
+        Show Listings
+      </button>
+
         </form>
         <div className='flex justify-between mt-5'>
         <span
